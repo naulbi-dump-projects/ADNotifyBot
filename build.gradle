@@ -1,0 +1,40 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+}
+
+group 'Bootstrap'
+version '1.0-SNAPSHOT'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+sourceCompatibility = '8'
+targetCompatibility = '8'
+
+repositories {
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+}
+
+shadowJar {
+    manifest{
+        attributes 'Main-Class': project.group
+    }
+    archiveFileName = "${project.name}-${project.version}.jar"
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    compileOnly 'org.projectlombok:lombok:1.18.28'
+    annotationProcessor 'org.projectlombok:lombok:1.18.28'
+
+    implementation 'com.zaxxer:HikariCP:4.0.3' // 4.0.3 - Java 8 maven artifact (maintenance mode) // 5.0.1 - Java 11+ maven artifact
+    implementation 'mysql:mysql-connector-java:8.0.33'
+
+    implementation 'org.telegram:telegrambots:6.8.0'
+
+    implementation 'org.jsoup:jsoup:1.16.1'
+}
