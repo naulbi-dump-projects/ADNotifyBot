@@ -52,7 +52,8 @@ public class WebParser {
                 BotLauncher.messageHandler.sendImage("-1001910022940",
                         "<b>" + title + "</b>\n\n"
                                 + "Зрительский рейтинг: " + rating + "\n\n"
-                                + "Открыть сайт: \n- <a href=\"anidub.com/" + idVideo + "-.html\">Зеркало anidub.com</a>\n"
+                                + "Открыть сайт: \n"
+                                + "- <a href=\"anidub.com/" + idVideo + "-.html\">Зеркало anidub.com</a>\n"
                                 + "- <a href=\"anidub.live/" + idVideo + "-.html\">Зеркало anidub.live</a>\n"
                                 + "- <a href=\"anidub.life/" + idVideo + "-.html\">Зеркало anidub.life</a>\n"
                                 + "- <a href=\"anidub.club/" + idVideo + "-.html\">Зеркало anidub.club</a>\n"
