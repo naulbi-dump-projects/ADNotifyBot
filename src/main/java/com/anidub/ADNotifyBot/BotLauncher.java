@@ -15,14 +15,15 @@ import static flaticommunity.log.TypeLogger.*;
 
 public class BotLauncher {
 
+    private static final String TELEGRAM_BOT_TOKEN = "6664136994:AAFD52IpWsVYhrcV3S4cixd_eOS0tJrFjRk";
+
     public static WebParser webParser;
+    public static FlatiLogger flatiLogger;
     public static MessageHandler messageHandler;
     public static DatabaseManager databaseManager;
-
-    private static final String TELEGRAM_BOT_TOKEN = "6664136994:AAGOllkVtSZ5FdknUqmH4R_PSsOo5eZC45Q";
-    public static List<Integer> videosIds = new ArrayList<>();//Collections.synchronizedList(new ArrayList<>());
     public static ScheduledExecutorService executorService;
-    public static FlatiLogger flatiLogger;
+
+    public static Map<Integer, Integer> videos = new HashMap<>();//Collections.synchronizedList(new ArrayList<>());
 
     public static void main(String[] args) {
         try {
@@ -36,13 +37,13 @@ public class BotLauncher {
             databaseManager = new DatabaseManager(
                     String.format(
                         "jdbc:mysql://%s:%d/%s?useSSL=%s",
-                        "195.18.27.252", // host
+                        "127.0.0.1", // host
                         (short) 3306, // port
-                        "anidub_notify", // database
+                        "anidubnotify", // database
                         "false"
                     ),
-                    "anidub_notify",
-                    "AD_9jd59Qvdj5zVvD7z5nhJW59rr52ZZ7MsAzesY6hRATfnfZfugGxTRsS9XhVAWZmzskTCEgv63qfHjxaNKnTTNpHC6X");
+                    "root",
+                    "");
 
             flatiLogger.log(INFO, "[Startup] [&bTelegram&r] Регистрация &bтелеграм &rбота...");
             registerTelegram();
@@ -54,29 +55,31 @@ public class BotLauncher {
             executorService = Executors.newScheduledThreadPool(2);
             // database
             executorService.scheduleAtFixedRate(() -> {
-                flatiLogger.log(INFO, "[&aExecutors&r] Исполнение &ascheduler &rдля &edatabase&r.");
+                flatiLogger.log(INFO, "[&aExecutors&r] Процесс использования &ascheduler &rдля &edatabase&r.");
                 // Вызов метода выполнения запроса
-                try {
-                    final List<Integer> syncIdsVideos = databaseManager.executeQuery();
-                    if (videosIds.isEmpty()) { // Первая загрузка
-                        videosIds.addAll(syncIdsVideos);
-                        return;
-                    }
-
-                    if (videosIds.equals(syncIdsVideos)) return; // Синхронизация каждые 5 минут
-                    databaseManager.updateData();
-                } catch (Exception ex) {
-                    ex.printStackTrace();
+                final Map<Integer, Integer> syncVideos = databaseManager.executeQuery();
+                if (videos.isEmpty()) { // Первая загрузка
+                    videos.putAll(syncVideos);
+                    flatiLogger.log(INFO, "[&aExecutors&r] &9Успешно &fиспользован &ascheduler &rдля &edatabase&r в ходе &4наполнения&r данными.");
+                    return;
                 }
+
+                if (videos.equals(syncVideos)) {
+                    flatiLogger.log(INFO, "[&aExecutors&r] &9Успешно &fиспользован &ascheduler &rдля &edatabase&r в качестве &6синхронизациии&r.");
+                    return; // Синхронизация каждые 5 минут
+                }
+                databaseManager.updateData();
+                flatiLogger.log(INFO, "[&aExecutors&r] &9Успешно &fиспользован &ascheduler &rдля &edatabase&r с новыми данными с &dвеб-парсинга&r.");
             }, 0, 5, TimeUnit.MINUTES); // 5 минут
             // site
             executorService.scheduleAtFixedRate(() -> {
-                flatiLogger.log(INFO, "[&aExecutors&r] Исполнение &ascheduler &rдля &dвеб-парсинга&r.");
+                flatiLogger.log(INFO, "[&aExecutors&r] Процесс использования &ascheduler &rдля &dвеб-парсинга&r.");
                 try {
                     webParser.parsePopular();
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
+                flatiLogger.log(INFO, "[&aExecutors&r] &9Успешно &fиспользован &ascheduler &rдля &dвеб-парсинга&r.");
             }, 5, 60, TimeUnit.SECONDS); // 1 минута
 
             flatiLogger.log(INFO, "[Startup] Ботик &2запущен&r.");
@@ -106,8 +109,8 @@ public class BotLauncher {
         flatiLogger.log(INFO, "[Startup] Update cached live results...");
         databaseManager.updateData();
 
-        //flatiLogger.log(INFO, "[Startup] Shutdown database message...");
-        //databaseManager.hikariDataSource.close();
+        flatiLogger.log(INFO, "[Startup] Shutdown database message...");
+        databaseManager.hikariDataSource.close();
 
         flatiLogger.log(INFO, "[Startup] Всё &2остановлено&r! Гудбай.");
     }

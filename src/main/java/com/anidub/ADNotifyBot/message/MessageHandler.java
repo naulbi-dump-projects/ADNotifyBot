@@ -2,9 +2,9 @@ package com.anidub.ADNotifyBot.message;
 
 import lombok.*;
 import org.telegram.telegrambots.bots.*;
+import org.telegram.telegrambots.meta.exceptions.*;
 import org.telegram.telegrambots.meta.api.objects.*;
 import org.telegram.telegrambots.meta.api.methods.send.*;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class MessageHandler extends TelegramLongPollingBot {
