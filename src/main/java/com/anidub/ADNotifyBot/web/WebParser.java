@@ -77,7 +77,7 @@ public class WebParser {
 
     private static final Pattern pattern = Pattern.compile("\\[(\\d+)[^X\\d]+([X\\d]+)\\]");
     public static Integer parseSeries(String title) {
-        final Matcher matcher = pattern.matcher(title.toLowerCase()); // зачем стоит lowerCase? - многоуважаемые регулярные выражения не понимают CASE_INSENSITIVE
+        final Matcher matcher = pattern.matcher(title);
         return matcher.find() ? Integer.parseInt(matcher.group(1)) : -1;
     }
 
