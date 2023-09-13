@@ -34,16 +34,29 @@ public class BotLauncher {
             Runtime.getRuntime().addShutdownHook(new Thread(BotLauncher::stop));
 
             flatiLogger.log(INFO, "[Startup] [&eDatabase&r] Подключение к &eбазе данных&r...");
-            databaseManager = new DatabaseManager(
-                    String.format(
-                        "jdbc:mysql://%s:%d/%s?useSSL=%s",
-                        "127.0.0.1", // host
-                        (short) 3306, // port
-                        "anidubnotify", // database
-                        "false"
-                    ),
-                    "root",
-                    "");
+            if(System.getProperty("anidubnotify.host") != null) {
+                databaseManager = new DatabaseManager(
+                        String.format(
+                                "jdbc:mysql://%s:%d/%s?useSSL=%s",
+                                System.getProperty("anidubnotify.host"),
+                                (short) Integer.parseInt(System.getProperty("anidubnotify.port")),
+                                System.getProperty("anidubnotify.database"),
+                                System.getProperty("anidubnotify.useSSL")
+                        ),
+                        System.getProperty("anidubnotify.username"),
+                        System.getProperty("anidubnotify.password"));
+            }else{
+                databaseManager = new DatabaseManager(
+                        String.format(
+                                "jdbc:mysql://%s:%d/%s?useSSL=%s",
+                                "127.0.0.1", // host
+                                (short) 3306, // port
+                                "anidubnotify", // database
+                                "false"
+                        ),
+                        "root",
+                        "");
+            }
 
             flatiLogger.log(INFO, "[Startup] [&bTelegram&r] Регистрация &bтелеграм &rбота...");
             registerTelegram();
