@@ -7,9 +7,7 @@ import org.jsoup.nodes.*;
 import org.jsoup.select.*;
 
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
+import java.util.regex.*;
 
 import static flaticommunity.log.TypeLogger.*;
 

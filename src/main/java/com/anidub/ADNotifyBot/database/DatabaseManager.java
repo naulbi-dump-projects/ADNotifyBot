@@ -1,19 +1,11 @@
 package com.anidub.ADNotifyBot.database;
 
-import com.anidub.ADNotifyBot.BotLauncher;
+import java.sql.*;
+import java.util.*;
+import java.util.stream.*;
 import com.zaxxer.hikari.*;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
-
-import static flaticommunity.log.TypeLogger.INFO;
+import com.anidub.ADNotifyBot.*;
+import static flaticommunity.log.TypeLogger.*;
 
 public class DatabaseManager {
     public Connection connection;
@@ -26,9 +18,11 @@ public class DatabaseManager {
         hikariConfig.setUsername(username);
         hikariConfig.setPassword(password);
 
+        /*
         if (false) { // legacy-driver
             hikariConfig.setDataSourceClassName("com.mysql.jdbc.Driver");
         }
+        */
 
         hikariConfig.addDataSourceProperty("cachePrepStmts", "true");
         hikariConfig.addDataSourceProperty("prepStmtCacheSize", "250");
@@ -96,7 +90,6 @@ public class DatabaseManager {
     public String updateSQL = "UPDATE `live` SET `videos` = ? WHERE `id` = 1";
     public void updateData() {
         if(BotLauncher.videos.isEmpty()) return;
-
 
         StringBuilder stringBuilder = new StringBuilder();
         try (PreparedStatement preparedStatement = connection.prepareStatement(updateSQL)) {

@@ -1,14 +1,9 @@
-import com.anidub.ADNotifyBot.BotLauncher;
-import org.apache.commons.lang3.StringUtils;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
+import org.jsoup.*;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
+import org.jsoup.nodes.*;
+import java.util.regex.*;
+import java.util.stream.*;
+import org.jsoup.select.*;
 
 public class AnimeIDsLiveParser {
 
@@ -43,9 +38,9 @@ public class AnimeIDsLiveParser {
         }
     }
 
-    private static final Pattern pattern = Pattern.compile("\\[(\\d+) из ([\\w\\d]+)\\]$");
+    private static final Pattern pattern = Pattern.compile("\\[(\\d+)[^X\\d]+([X\\d]+)\\]");
     public static Integer parseSeries(String title) {
-        final Matcher matcher = pattern.matcher(title.toLowerCase()); // зачем стоит lowerCase? - многоуважаемые регулярные выражения не понимают CASE_INSENSITIVE
+        final Matcher matcher = pattern.matcher(title);
         return matcher.find() ? Integer.parseInt(matcher.group(1)) : -1;
     }
 
