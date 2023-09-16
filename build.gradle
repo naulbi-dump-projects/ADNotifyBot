@@ -19,10 +19,16 @@ repositories {
 }
 
 shadowJar {
+    archiveFileName = "${project.name}-${project.version}.jar"
+
+    exclude 'INFO_SRC'
+    exclude 'INFO_BIN'
+    exclude 'LICENSE'
+    exclude 'README'
+
     manifest{
         attributes 'Main-Class': project.group
     }
-    archiveFileName = "${project.name}-${project.version}.jar"
 }
 
 dependencies {

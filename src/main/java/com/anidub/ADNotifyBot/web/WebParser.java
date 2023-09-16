@@ -51,7 +51,8 @@ public class WebParser {
                 BotLauncher.flatiLogger.log(INFO, "[NEW VIDEO/" + idVideo + "] " + title);
                 BotLauncher.messageHandler.sendImage("-1001910022940",
                         "<b>" + title + "</b>\n\n"
-                                + "Зрительский рейтинг: " + rating + "\n\n"
+                                + "Зрительский рейтинг: " + rating + "\n"
+                                + "Текущая серия: " + series + "\n\n"
                                 + "Открыть сайт: \n"
                                 + "- <a href=\"anidub.com/" + idVideo + "-.html\">Зеркало anidub.com</a>\n"
                                 + "- <a href=\"anidub.live/" + idVideo + "-.html\">Зеркало anidub.live</a>\n"
