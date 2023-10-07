@@ -50,15 +50,14 @@ public class WebParser {
                 BotLauncher.flatiLogger.log(INFO, "[NEW VIDEO/" + idVideo + "] " + title);
                 BotLauncher.messageHandler.sendImage("-1001910022940",
                         "<b>" + title + "</b>\n\n"
+                                + "Текущая серия: " + series + "\n"
                                 + "Зрительский рейтинг: " + rating + "\n"
-                                + "Текущая серия: " + series + "\n\n"
+                                + "Тип получения данных: <b>Со страницы</b>/<strike>С ленты</strike>\n\n"
                                 + "Открыть сайт: \n"
                                 + "- <a href=\"anidub.com/" + idVideo + "-.html\">Зеркало anidub.com</a>\n"
                                 + "- <a href=\"anidub.live/" + idVideo + "-.html\">Зеркало anidub.live</a>\n"
                                 + "- <a href=\"anidub.life/" + idVideo + "-.html\">Зеркало anidub.life</a>\n"
-                                + "- <a href=\"anidub.club/" + idVideo + "-.html\">Зеркало anidub.club</a>\n"
-                                + "\n\n"
-                                + "Тип получения данных: <b>Со страницы</b>/<strike>С ленты</strike>\n\n"
+                                + "- <a href=\"anidub.club/" + idVideo + "-.html\">Зеркало anidub.club</a>\n\n"
                                 + "\nt.me/anidubnotify | t.me/anidubnotifydev\n"
                                 + "\n#video" + idVideo
                         // + "Открыть сайт: <a href=\"anidub.vip/" + idVideo  +"-.html\">Зеркало anidub.vip</a>"
