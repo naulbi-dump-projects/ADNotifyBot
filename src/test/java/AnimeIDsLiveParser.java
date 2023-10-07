@@ -7,13 +7,19 @@ import org.jsoup.select.*;
 
 public class AnimeIDsLiveParser {
 
+    private static final boolean popular = false;
+
     public static void main(String[] args) {
+
         Map<Integer, Integer> videos = new HashMap<>();
         String websiteUrl = "https://anidub.live"; // Замените на URL вашего сайта
         try {
             Document doc = Jsoup.connect(websiteUrl).get();
             Elements owlItems = doc.body().getAllElements();
-            final List<Element> items = new ArrayList<>(owlItems.select(".popular").select(".th-item"));
+            final List<Element> items = popular ?
+                    new ArrayList<>(owlItems.select(".popular").select(".th-item"))
+                    :
+                    new ArrayList<>(owlItems.select(".content").select(".sect-content").select(".th-item"));
             Collections.reverse(items);
             for (Element owlItem : items) {
                 String title = owlItem.select(".th-title").text();

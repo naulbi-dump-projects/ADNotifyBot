@@ -21,7 +21,8 @@ public class WebParser {
         Document doc = Jsoup.connect(websiteUrl).get();
         Elements owlItems = doc.body().getAllElements();
         int newVideos = 1;
-        final List<Element> items = new ArrayList<>(owlItems.select(".popular").select(".th-item"));
+        //final List<Element> items = new ArrayList<>(owlItems.select(".popular").select(".th-item"));
+        final List<Element> items = new ArrayList<>(owlItems.select(".content").select(".sect-content").select(".th-item"));
         Collections.reverse(items);
         Map<Integer, Integer> parsedVideos = new HashMap<>();
         for (Element owlItem : items) {
@@ -56,6 +57,8 @@ public class WebParser {
                                 + "- <a href=\"anidub.live/" + idVideo + "-.html\">Зеркало anidub.live</a>\n"
                                 + "- <a href=\"anidub.life/" + idVideo + "-.html\">Зеркало anidub.life</a>\n"
                                 + "- <a href=\"anidub.club/" + idVideo + "-.html\">Зеркало anidub.club</a>\n"
+                                + "\n\n"
+                                + "Тип получения данных: <b>Со страницы</b>/<strike>С ленты</strike>\n\n"
                                 + "\nt.me/anidubnotify | t.me/anidubnotifydev\n"
                                 + "\n#video" + idVideo
                         // + "Открыть сайт: <a href=\"anidub.vip/" + idVideo  +"-.html\">Зеркало anidub.vip</a>"
