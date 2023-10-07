@@ -57,7 +57,7 @@ public class WebParser {
                                 + "- <a href=\"anidub.com/" + idVideo + "-.html\">Зеркало anidub.com</a>\n"
                                 + "- <a href=\"anidub.live/" + idVideo + "-.html\">Зеркало anidub.live</a>\n"
                                 + "- <a href=\"anidub.life/" + idVideo + "-.html\">Зеркало anidub.life</a>\n"
-                                + "- <a href=\"anidub.club/" + idVideo + "-.html\">Зеркало anidub.club</a>\n\n"
+                                + "- <a href=\"anidub.club/" + idVideo + "-.html\">Зеркало anidub.club</a>\n"
                                 + "\nt.me/anidubnotify | t.me/anidubnotifydev\n"
                                 + "\n#video" + idVideo
                         // + "Открыть сайт: <a href=\"anidub.vip/" + idVideo  +"-.html\">Зеркало anidub.vip</a>"
