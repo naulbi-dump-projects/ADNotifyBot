@@ -52,8 +52,8 @@ public class WebParser {
                         "<b>" + title + "</b>\n\n"
                                 + "Текущая серия: " + series + "\n"
                                 + "Зрительский рейтинг: " + rating + "\n"
-                                + "Тип получения данных: <b>Со страницы</b>/<strike>С ленты</strike>\n\n"
-                                + "Открыть сайт: \n"
+                                //+ "Тип получения данных: <b>Со страницы</b>/<strike>С ленты</strike>\n"
+                                + "\nОткрыть сайт: \n"
                                 + "- <a href=\"anidub.com/" + idVideo + "-.html\">Зеркало anidub.com</a>\n"
                                 + "- <a href=\"anidub.live/" + idVideo + "-.html\">Зеркало anidub.live</a>\n"
                                 + "- <a href=\"anidub.life/" + idVideo + "-.html\">Зеркало anidub.life</a>\n"
@@ -68,10 +68,10 @@ public class WebParser {
                 );
                 Thread.sleep(5000L * newVideos++);
             }
+
+            BotLauncher.videos = parsedVideos; // да, каждый раз обновлять список плохая затея, но если стопать бота во время парсинга, то будет ещё хуже /:
             //BotLauncher.flatiLogger.log(INFO, "FOR|" + videosToString(parsedVideos));
         }
-
-        BotLauncher.videos = parsedVideos;
 
         //BotLauncher.flatiLogger.log(INFO, "Videos list updated: " + videosToString(BotLauncher.videos));
     }
