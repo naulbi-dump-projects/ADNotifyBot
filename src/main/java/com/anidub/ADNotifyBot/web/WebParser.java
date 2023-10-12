@@ -8,6 +8,7 @@ import org.jsoup.select.*;
 
 import java.util.*;
 import java.util.regex.*;
+import java.util.stream.Collectors;
 
 import static flaticommunity.log.TypeLogger.*;
 
@@ -16,7 +17,7 @@ public class WebParser {
     public String websiteUrl;
 
     public void parsePopular() throws Exception {
-        //BotLauncher.flatiLogger.log(INFO, "Synced VideosIDs list: " + videosToString(BotLauncher.videos));
+        BotLauncher.flatiLogger.log(INFO, "Synced VideosIDs list: " + videosToString(BotLauncher.videos));
 
         Document doc = Jsoup.connect(websiteUrl).get();
         Elements owlItems = doc.body().getAllElements();
@@ -36,17 +37,17 @@ public class WebParser {
                 ex.printStackTrace();
                 continue;
             }
-            //BotLauncher.flatiLogger.log(INFO, "ID: " + idVideo);
+            BotLauncher.flatiLogger.log(INFO, "ID: " + idVideo);
 
             String rating = owlItem.select(".th-rating").text();
             int series = parseSeries(title);
             assert series != -1 : "int series is value -1";
 
-            //BotLauncher.flatiLogger.log(INFO, "Series: " + series);
+            BotLauncher.flatiLogger.log(INFO, "Series: " + series);
             parsedVideos.put(idVideo, series);
 
             if (!BotLauncher.videos.containsKey(idVideo) || !BotLauncher.videos.get(idVideo).equals(series)) {
-                //BotLauncher.flatiLogger.log(INFO, title + "\n" + link + "\n" + rating + "\n" + owlItem.select(".th-img").select("img").attr("src"));
+                BotLauncher.flatiLogger.log(INFO, title + "\n" + link + "\n" + rating + "\n" + owlItem.select(".th-img").select("img").attr("src"));
                 BotLauncher.flatiLogger.log(INFO, "[NEW VIDEO/" + idVideo + "] " + title);
                 BotLauncher.messageHandler.sendImage("-1001910022940",
                         "<b>" + title + "</b>\n\n"
@@ -69,11 +70,11 @@ public class WebParser {
                 Thread.sleep(5000L * newVideos++);
             }
 
-            BotLauncher.videos = parsedVideos; // да, каждый раз обновлять список плохая затея, но если стопать бота во время парсинга, то будет ещё хуже /:
-            //BotLauncher.flatiLogger.log(INFO, "FOR|" + videosToString(parsedVideos));
+            BotLauncher.flatiLogger.log(INFO, "FOR|" + videosToString(parsedVideos));
         }
+        BotLauncher.videos = parsedVideos; // да, каждый раз обновлять список плохая затея, но если стопать бота во время парсинга, то будет ещё хуже /:
 
-        //BotLauncher.flatiLogger.log(INFO, "Videos list updated: " + videosToString(BotLauncher.videos));
+        BotLauncher.flatiLogger.log(INFO, "Videos list updated: " + videosToString(BotLauncher.videos));
     }
 
 
@@ -83,9 +84,9 @@ public class WebParser {
         return matcher.find() ? Integer.parseInt(matcher.group(1)) : -1;
     }
 
-    /*public String videosToString(Map<Integer, Integer> videos) {
+    public String videosToString(Map<Integer, Integer> videos) {
         return videos.entrySet().stream()
                 .map(entry -> entry.getKey() + ":" + entry.getValue())
                 .collect(Collectors.joining(", "));
-    }*/
+    }
 }

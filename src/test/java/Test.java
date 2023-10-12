@@ -3,8 +3,8 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
 public class Test {
-    public static void main(String[] args) {
-        MessageHandler messageHandler = new MessageHandler("");
+  /*  public static void main(String[] args) {
+        TestMessageHandler messageHandler = new TestMessageHandler("");
 
         TelegramBotsApi telegramBotsApi = null;
         try {
@@ -29,5 +29,5 @@ public class Test {
         String test = "1l";
         System.out.println(Integer.parseInt(test));
     }
-
+*/
 }

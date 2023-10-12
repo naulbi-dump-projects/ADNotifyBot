@@ -1,22 +1,7 @@
-import org.telegram.telegrambots.bots.TelegramLongPollingBot;
-import org.telegram.telegrambots.meta.api.methods.send.SendDocument;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
-import org.telegram.telegrambots.meta.api.methods.send.SendVideo;
-import org.telegram.telegrambots.meta.api.objects.InputFile;
-import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-
-import java.io.File;
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.concurrent.ThreadLocalRandom;
-
-public class MessageHandler extends TelegramLongPollingBot {
+public class TestMessageHandler /* extends TelegramLongPollingBot*/ { /*
     public String token;
 
-    public MessageHandler(String token) {
+    public TestMessageHandler(String token) {
         this.token = token;
     }
 
@@ -98,5 +83,5 @@ public class MessageHandler extends TelegramLongPollingBot {
     @Override
     public String getBotToken() {
         return token;
-    }
+    }*/
 }

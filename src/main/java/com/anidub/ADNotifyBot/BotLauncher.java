@@ -100,7 +100,7 @@ public class BotLauncher {
                 }
 
                 flatiLogger.log(INFO, "[&aExecutors&r] &9Успешно &fиспользован &ascheduler &rдля &dвеб-парсинга&r.");
-            }, 0, 60, TimeUnit.SECONDS); // 1 минута
+            }, 5, 60, TimeUnit.SECONDS); // 1 минута
 
             flatiLogger.log(INFO, "[Startup] Ботик &2запущен&r.");
         }catch (Exception ex) {
