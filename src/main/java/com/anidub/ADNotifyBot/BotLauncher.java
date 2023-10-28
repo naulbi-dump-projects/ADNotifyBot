@@ -18,7 +18,8 @@ public class BotLauncher {
     public static DatabaseManager databaseManager;
     public static ScheduledExecutorService executorService;
 
-    public static Map<Integer, Integer> videos = new HashMap<>();
+    public static Map<Integer, Integer> videos = new HashMap<>(); // idVideo, series
+    //public static Map<Integer, Integer> trackerVideos = new HashMap<>(); // idVideo, trackerIdVideo
 
     private static final String TELEGRAM_BOT_TOKEN = "6664136994:AAFD52IpWsVYhrcV3S4cixd_eOS0tJrFjRk";
 
