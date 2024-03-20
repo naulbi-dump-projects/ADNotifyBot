@@ -21,7 +21,7 @@ public class BotLauncher {
     public static Map<Integer, Integer> videos = new HashMap<>(); // idVideo, series
     //public static Map<Integer, Integer> trackerVideos = new HashMap<>(); // idVideo, trackerIdVideo
 
-    private static final String TELEGRAM_BOT_TOKEN = "6664136994:AAFD52IpWsVYhrcV3S4cixd_eOS0tJrFjRk";
+    private static final String TELEGRAM_BOT_TOKEN = "7101034406:AAH58bBLcg2G1W63PeIWTpbORv7iiAsFq4A";
 
     public static void main(String[] args) {
         try {
@@ -60,7 +60,7 @@ public class BotLauncher {
             registerTelegram();
 
             flatiLogger.log(INFO, "[Startup] [&dWebParser&r] Регистрация &dвеб-парсера&r...");
-            webParser = new WebParser("https://anidub.live");
+            webParser = new WebParser("https://anidub.pro");
 
             flatiLogger.log(INFO, "[Startup] [&aExecutors&r] Регистрация &aschedulers&r...");
             executorService = Executors.newScheduledThreadPool(2);

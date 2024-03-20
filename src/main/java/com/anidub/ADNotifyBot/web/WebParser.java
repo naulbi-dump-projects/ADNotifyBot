@@ -50,7 +50,7 @@ public class WebParser {
                 //BotLauncher.flatiLogger.log(INFO, title + "\n" + link + "\n" + rating + "\n" + owlItem.select(".th-img").select("img").attr("src"));
                 BotLauncher.flatiLogger.log(INFO, "[NEW VIDEO/" + idVideo + "] " + title);
 
-                String trackerURL = parseTracker("https://anidub.live/" + idVideo + "-.html");
+                String trackerURL = parseTracker("https://anidub.pro/" + idVideo + "-.html");
 
                 StringBuilder messageBuilder = new StringBuilder();
                 messageBuilder.append("<b>").append(title).append("</b>\n\n");
@@ -59,6 +59,7 @@ public class WebParser {
                 //+ "Тип получения данных: <b>Со страницы</b>/<strike>С ленты</strike>\n"
                 messageBuilder.append("\nОткрыть сайт: \n");
                 messageBuilder.append("- <a href=\"anidub.com/").append(idVideo).append("-.html\">Зеркало anidub.com</a>\n");
+                messageBuilder.append("- <a href=\"anidub.pro/").append(idVideo).append("-.html\">Зеркало anidub.pro</a>\n");
                 messageBuilder.append("- <a href=\"anidub.live/").append(idVideo).append("-.html\">Зеркало anidub.live</a>\n");
                 messageBuilder.append("- <a href=\"anidub.life/").append(idVideo).append("-.html\">Зеркало anidub.life</a>\n");
                 messageBuilder.append("- <a href=\"anidub.club/").append(idVideo).append("-.html\">Зеркало anidub.club</a>\n");
@@ -74,7 +75,7 @@ public class WebParser {
 
                 BotLauncher.messageHandler.sendImage("-1001910022940", // -1001910022940 = main channel || -1001577612011 = dev channel
                         messageBuilder.toString(),
-                        "https://anidub.live" + owlItem.select(".th-img").select("img").attr("src")
+                        "https://anidub.pro" + owlItem.select(".th-img").select("img").attr("src")
                 );
                 Thread.sleep(5000L * newVideos++);
             }
