@@ -73,7 +73,7 @@ public class WebParser {
                 // + MessageFormat.format(domain, "anidub.live", idVideo) + "\n" +
                 // MessageFormat.format(domain, "anidub.vip", idVideo)
 
-                BotLauncher.messageHandler.sendImage("-1001910022940", // -1001910022940 = main channel || -1001577612011 = dev channel
+                BotLauncher.messageHandler.sendImage("-1002088760542", // -1002088760542 = main channel || -1002091080112 = dev channel
                         messageBuilder.toString(),
                         "https://anidub.pro" + owlItem.select(".th-img").select("img").attr("src")
                 );
