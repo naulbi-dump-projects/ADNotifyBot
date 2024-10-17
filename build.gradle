@@ -10,9 +10,6 @@ tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
 
-sourceCompatibility = '8'
-targetCompatibility = '8'
-
 repositories {
     mavenCentral()
     maven { url 'https://jitpack.io' }
@@ -34,8 +31,8 @@ shadowJar {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    compileOnly 'org.projectlombok:lombok:1.18.28'
-    annotationProcessor 'org.projectlombok:lombok:1.18.28'
+    compileOnly 'org.projectlombok:lombok:1.18.34'
+    annotationProcessor 'org.projectlombok:lombok:1.18.34'
 
     implementation 'com.zaxxer:HikariCP:4.0.3' // 4.0.3 - Java 8 maven artifact (maintenance mode) // 5.0.1 - Java 11+ maven artifact
     implementation 'mysql:mysql-connector-java:8.0.33'
