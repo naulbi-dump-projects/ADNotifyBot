@@ -71,7 +71,6 @@ public class DatabaseManager {
                         .map(Integer::parseInt)
                         .collect(Collectors.toList())*/
             }
-            resultSet.close();
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -5,10 +5,10 @@ import flaticommunity.log.*;
 import java.util.concurrent.*;
 import com.anidub.ADNotifyBot.web.*;
 import com.anidub.ADNotifyBot.message.*;
-import org.telegram.telegrambots.meta.*;
 import com.anidub.ADNotifyBot.database.*;
 import static flaticommunity.log.TypeLogger.*;
-import org.telegram.telegrambots.updatesreceivers.*;
+import org.telegram.telegrambots.longpolling.*;
+import org.telegram.telegrambots.client.okhttp.*;
 
 public class BotLauncher {
 
@@ -108,11 +108,13 @@ public class BotLauncher {
         }
     }
 
-    private static void registerTelegram() throws Exception {
-        messageHandler = new MessageHandler(TELEGRAM_BOT_TOKEN);
-
-        final TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
-        telegramBotsApi.registerBot(messageHandler);
+    private static void registerTelegram() {
+        try (final TelegramBotsLongPollingApplication botsApplication = new TelegramBotsLongPollingApplication()) {
+            botsApplication.registerBot(TELEGRAM_BOT_TOKEN, messageHandler = new MessageHandler(new OkHttpTelegramClient(TELEGRAM_BOT_TOKEN)));
+            Thread.currentThread().join();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static void stop() {
