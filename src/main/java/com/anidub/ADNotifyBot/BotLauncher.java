@@ -109,12 +109,14 @@ public class BotLauncher {
     }
 
     private static void registerTelegram() {
-        try (final TelegramBotsLongPollingApplication botsApplication = new TelegramBotsLongPollingApplication()) {
-            botsApplication.registerBot(TELEGRAM_BOT_TOKEN, messageHandler = new MessageHandler(new OkHttpTelegramClient(TELEGRAM_BOT_TOKEN)));
-            //Thread.currentThread().join();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Executors.newSingleThreadExecutor().submit(() -> {
+            try (final TelegramBotsLongPollingApplication botsApplication = new TelegramBotsLongPollingApplication()) {
+                botsApplication.registerBot(TELEGRAM_BOT_TOKEN, messageHandler = new MessageHandler(new OkHttpTelegramClient(TELEGRAM_BOT_TOKEN)));
+                Thread.currentThread().join();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     public static void stop() {
