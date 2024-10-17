@@ -52,10 +52,8 @@ public class DatabaseManager {
 
     public String executeSQL = "SELECT `videos` FROM `live` WHERE `id` = 1";
     public Map<Integer, Integer> executeQuery() {
-
-        ResultSet resultSet = null;
-        try (PreparedStatement preparedStatement = connection.prepareStatement(executeSQL)) {
-            resultSet = preparedStatement.executeQuery();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(executeSQL);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
             while (resultSet.next()) {
                 String videos = resultSet.getString("videos");
                 if(videos.isEmpty()) return Collections.emptyMap();
@@ -73,21 +71,14 @@ public class DatabaseManager {
                         .map(Integer::parseInt)
                         .collect(Collectors.toList())*/
             }
+            resultSet.close();
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            if(resultSet != null) {
-                try{
-                    resultSet.close();
-                }catch(SQLException ex) {
-                    ex.printStackTrace();
-                }
-            }
         }
         return Collections.emptyMap();
     }
 
-    public String updateSQL = "UPDATE `live` SET `videos` = ? WHERE `id` = 1";
+    public final String updateSQL = "UPDATE `live` SET `videos` = ? WHERE `id` = 1";
     public void updateData() {
         if(BotLauncher.videos.isEmpty()) return;
 
@@ -95,14 +86,14 @@ public class DatabaseManager {
         try (PreparedStatement preparedStatement = connection.prepareStatement(updateSQL)) {
             BotLauncher.videos.forEach((videoId, series) -> stringBuilder.append(videoId).append(":").append(series).append(";"));
 
-            int lastSymbol = (stringBuilder.length() - 1);
+            final int lastSymbol = (stringBuilder.length() - 1);
             if(stringBuilder.charAt(lastSymbol) == ';') { // try to fix last symbol, my code isn't send me error this symbol, but I see he
                 stringBuilder.setLength(lastSymbol);
             }
 
             preparedStatement.setString(1, stringBuilder.toString());
 
-            int rowsAffected = preparedStatement.executeUpdate();
+            final int rowsAffected = preparedStatement.executeUpdate();
             BotLauncher.flatiLogger.log(INFO, "Updated " + rowsAffected + " rows.");
         } catch (Exception e) {
             e.printStackTrace();

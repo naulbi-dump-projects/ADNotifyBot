@@ -19,14 +19,14 @@ public class WebParser {
     public void parsePopular() throws Exception {
         BotLauncher.flatiLogger.log(INFO, "Synced VideosIDs list: " + videosToString(BotLauncher.videos));
 
-        Document doc = Jsoup.connect(websiteUrl).get();
-        Elements owlItems = doc.body().getAllElements();
+        final Document doc = Jsoup.connect(websiteUrl).get();
+        final Elements owlItems = doc.body().getAllElements();
         int newVideos = 1;
         //final List<Element> items = new ArrayList<>(owlItems.select(".popular").select(".th-item"));
         final List<Element> items = new ArrayList<>(owlItems.select(".content").select(".sect-content").select(".th-item"));
         Collections.reverse(items);
         Map<Integer, Integer> parsedVideos = new HashMap<>();
-        for (Element owlItem : items) {
+        for (final Element owlItem : items) {
             String title = owlItem.select(".th-title").text();
             String link = owlItem.select(".th-in").attr("href");
             int idVideo;
@@ -87,19 +87,19 @@ public class WebParser {
         BotLauncher.flatiLogger.log(INFO, "Videos list updated: " + videosToString(BotLauncher.videos));
     }
 
-    public String parseTracker(String videoUrl) throws Exception {
-        Document document = Jsoup.connect(videoUrl).get();
-        Elements flistElements = document.body().select(".wrap")  // end popular
+    public final String parseTracker(String videoUrl) throws Exception {
+        final Document document = Jsoup.connect(videoUrl).get();
+        final Elements flistElements = document.body().select(".wrap")  // end popular
                 .select(".article.full2.ignore-select")
                 .select(".fright.fx-1")
                 .select(".flist");
 
-        for (Element flistElement : flistElements) {
+        for (final Element flistElement : flistElements) {
             // Проверьте, содержит ли элемент текст ".torrent"
             if (flistElement.text().contains(".torrent")) {
                 // Найдите ссылку внутри элемента
-                Element linkElement = flistElement.select("a").first();
-                String trackerLink = linkElement.attr("href");
+                final Element linkElement = flistElement.select("a").first();
+                final String trackerLink = linkElement.attr("href");
                 System.out.println("Ссылка на трекер: " + trackerLink);
 
                 return "tr.anidub.com/" + parseIdVideo(trackerLink) + "-.html";
@@ -110,7 +110,7 @@ public class WebParser {
 
 
     private static final Pattern pattern = Pattern.compile("\\[(\\d+)[^X\\d]+([X\\d]+)\\]");
-    public static Integer parseSeries(String title) {
+    public static Integer parseSeries(final String title) {
         final Matcher matcher = pattern.matcher(title);
         return matcher.find() ? Integer.parseInt(matcher.group(1)) : -1;
     }
@@ -119,7 +119,7 @@ public class WebParser {
         return (link.split("-")[0].substring((link.lastIndexOf("/") + 1)));
     }
 
-    public String videosToString(Map<Integer, Integer> videos) {
+    public String videosToString(final Map<Integer, Integer> videos) {
         return videos.entrySet().stream()
                 .map(entry -> entry.getKey() + ":" + entry.getValue())
                 .collect(Collectors.joining(", "));

@@ -32,8 +32,8 @@ public class BotLauncher {
             Runtime.getRuntime().addShutdownHook(new Thread(BotLauncher::stop));
 
             flatiLogger.log(INFO, "[Startup] [&eDatabase&r] Подключение к &eбазе данных&r...");
-            if(System.getProperty("anidubnotify.host") != null) {
-                databaseManager = new DatabaseManager(
+            databaseManager = (System.getProperty("anidubnotify.host") != null) ?
+                    new DatabaseManager(
                         String.format(
                                 "jdbc:mysql://%s:%d/%s?useSSL=%s",
                                 System.getProperty("anidubnotify.host"),
@@ -42,9 +42,9 @@ public class BotLauncher {
                                 System.getProperty("anidubnotify.useSSL")
                         ),
                         System.getProperty("anidubnotify.username"),
-                        System.getProperty("anidubnotify.password"));
-            }else{
-                databaseManager = new DatabaseManager(
+                        System.getProperty("anidubnotify.password"))
+                    :
+                    new DatabaseManager(
                         String.format(
                                 "jdbc:mysql://%s:%d/%s?useSSL=%s",
                                 "127.0.0.1", // host
@@ -54,7 +54,6 @@ public class BotLauncher {
                         ),
                         "root",
                         "");
-            }
 
             flatiLogger.log(INFO, "[Startup] [&bTelegram&r] Регистрация &bтелеграм &rбота...");
             registerTelegram();
@@ -112,7 +111,7 @@ public class BotLauncher {
     private static void registerTelegram() throws Exception {
         messageHandler = new MessageHandler(TELEGRAM_BOT_TOKEN);
 
-        TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
+        final TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
         telegramBotsApi.registerBot(messageHandler);
     }
 
@@ -124,7 +123,7 @@ public class BotLauncher {
 
         try {
             Thread.sleep(500L);
-        }catch (InterruptedException ex) {}
+        }catch (InterruptedException ignored) {}
 
         flatiLogger.log(INFO, "[Startup] Update cached live results...");
         databaseManager.updateData();
