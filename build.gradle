@@ -3,6 +3,9 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
+sourceCompatibility = '17'
+targetCompatibility = '17'
+
 group 'Bootstrap'
 version '1.1.2-SNAPSHOT'
 
