@@ -37,7 +37,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.34'
 
     // database
-    implementation 'com.zaxxer:HikariCP:4.0.3' // 4.0.3 - Java 8 maven artifact (maintenance mode) // 5.0.1 - Java 11+ maven artifact
+    implementation 'com.zaxxer:HikariCP:6.0.0' // 4.0.3 - Java 8 maven artifact (maintenance mode) // 5.0.1 - Java 11+ maven artifact
     implementation 'mysql:mysql-connector-java:8.0.33'
 
     // telegram main
@@ -47,5 +47,5 @@ dependencies {
     // parsers and handlers
                         implementation 'org.jsoup:jsoup:1.16.1' // <REMOVED SOON - PERFORMANCE>
     implementation 'com.github.sapher:youtubedl-java:1.+'
-    implementation 'com.squareup.okhttp3:okhttp:3.14.9'
+    implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.14'
 }
