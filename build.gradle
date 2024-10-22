@@ -43,9 +43,11 @@ dependencies {
     implementation 'com.zaxxer:HikariCP:6.0.0' // 4.0.3 - Java 8 maven artifact (maintenance mode) // 5.0.1 - Java 11+ maven artifact
     implementation 'mysql:mysql-connector-java:8.0.33'
 
+    // discord
+    implementation 'net.dv8tion:JDA:5.1.2'
     // telegram main
-    implementation 'org.telegram:telegrambots-longpolling:7.10.0'
-    implementation 'org.telegram:telegrambots-client:7.10.0'
+    //implementation 'org.telegram:telegrambots-longpolling:7.10.0'
+    //implementation 'org.telegram:telegrambots-client:7.10.0'
 
     // parsers and handlers
                         implementation 'org.jsoup:jsoup:1.16.1' // <REMOVED SOON - PERFORMANCE>

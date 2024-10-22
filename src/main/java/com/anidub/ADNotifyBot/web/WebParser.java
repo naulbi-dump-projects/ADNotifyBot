@@ -2,6 +2,7 @@ package com.anidub.ADNotifyBot.web;
 
 import com.anidub.ADNotifyBot.*;
 import lombok.*;
+import net.dv8tion.jda.api.EmbedBuilder;
 import org.jsoup.*;
 import org.jsoup.nodes.*;
 import org.jsoup.select.*;
@@ -53,30 +54,38 @@ public class WebParser {
                 String trackerURL = parseTracker("https://anidub.pro/" + idVideo + "-.html");
 
                 StringBuilder messageBuilder = new StringBuilder();
-                messageBuilder.append("<b>").append(title).append("</b>\n\n");
+                messageBuilder.append("**").append(title).append("**\n\n");
                 messageBuilder.append("Текущая серия: ").append(series).append("\n");
                 messageBuilder.append("Зрительский рейтинг: ").append(rating).append("\n");
                 //+ "Тип получения данных: <b>Со страницы</b>/<strike>С ленты</strike>\n"
                 messageBuilder.append("\nОткрыть сайт: \n");
-                messageBuilder.append("- <a href=\"anidub.com/").append(idVideo).append("-.html\">Зеркало anidub.com</a>\n");
-                messageBuilder.append("- <a href=\"anidub.pro/").append(idVideo).append("-.html\">Зеркало anidub.pro</a>\n");
-                messageBuilder.append("- <a href=\"anidub.live/").append(idVideo).append("-.html\">Зеркало anidub.live</a>\n");
-                messageBuilder.append("- <a href=\"anidub.life/").append(idVideo).append("-.html\">Зеркало anidub.life</a>\n");
-                messageBuilder.append("- <a href=\"anidub.club/").append(idVideo).append("-.html\">Зеркало anidub.club</a>\n");
+                messageBuilder.append("- [Зеркало anidub.com](https://anidub.com/").append(idVideo).append(")\n");
+                messageBuilder.append("- [Зеркало anidub.pro](https://anidub.pro/").append(idVideo).append(")\n");
+                messageBuilder.append("- [Зеркало anidub.live](https://anidub.live/").append(idVideo).append(")\n");
+                messageBuilder.append("- [Зеркало anidub.life](https://anidub.life").append(idVideo).append(")\n");
+                messageBuilder.append("- [Зеркало anidub.club](https://anidub.club/").append(idVideo).append(")\n");
                 if(trackerURL != null) {
                     messageBuilder.append("Открыть трекер: \n");
-                    messageBuilder.append("- <a href=\"").append(trackerURL).append("\">Зеркало anidub.com</a>\n");
+                    messageBuilder.append("- [Зеркало anidub.com](https://").append(trackerURL).append(")\n");
                 }
-                messageBuilder.append("\nt.me/anidubnotify | t.me/anidubnotifydev\n");
+                //messageBuilder.append("\nt.me/anidubnotify | t.me/anidubnotifydev\n");
                 messageBuilder.append("\n#video").append(idVideo);
                 // + "Открыть сайт: <a href=\"anidub.vip/" + idVideo  +"-.html\">Зеркало anidub.vip</a>"
                 // + MessageFormat.format(domain, "anidub.live", idVideo) + "\n" +
                 // MessageFormat.format(domain, "anidub.vip", idVideo)
 
-                BotLauncher.messageHandler.sendImage("-1002088760542", // -1002088760542 = main channel || -1002091080112 = dev channel
+                /*BotLauncher.messageHandler.sendImage("-1002088760542", // -1002088760542 = main channel || -1002091080112 = dev channel
                         messageBuilder.toString(),
                         "https://anidub.pro" + owlItem.select(".th-img").select("img").attr("src")
-                );
+                );*/
+                final var embed = new EmbedBuilder()
+                        .setTitle(title)
+                        .setImage("https://anidub.pro" + owlItem.select(".th-img").select("img").attr("src"))
+                        .build();
+                BotLauncher.jda.getTextChannelById(1297141634886013000L)
+                        .sendMessage(messageBuilder.toString())
+                        .addEmbeds(embed)
+                        .queue();
                 Thread.sleep(5000L * newVideos++);
             }
 

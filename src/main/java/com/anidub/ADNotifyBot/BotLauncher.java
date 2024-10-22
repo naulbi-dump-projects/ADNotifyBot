@@ -4,24 +4,32 @@ import java.util.*;
 import flaticommunity.log.*;
 import java.util.concurrent.*;
 import com.anidub.ADNotifyBot.web.*;
-import com.anidub.ADNotifyBot.message.*;
 import com.anidub.ADNotifyBot.database.*;
+import lombok.SneakyThrows;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.requests.GatewayIntent;
+import net.dv8tion.jda.internal.utils.JDALogger;
+
 import static flaticommunity.log.TypeLogger.*;
-import org.telegram.telegrambots.longpolling.*;
-import org.telegram.telegrambots.client.okhttp.*;
+//import org.telegram.telegrambots.longpolling.*;
+//import org.telegram.telegrambots.client.okhttp.*;
 
 public class BotLauncher {
 
     public static WebParser webParser;
     public static FlatiLogger flatiLogger;
-    public static MessageHandler messageHandler;
+    //public static MessageHandler messageHandler;
+    public static JDA jda;
     public static DatabaseManager databaseManager;
     public static ScheduledExecutorService executorService;
 
     public static Map<Integer, Integer> videos = new HashMap<>(); // idVideo, series
     //public static Map<Integer, Integer> trackerVideos = new HashMap<>(); // idVideo, trackerIdVideo
 
-    private static final String TELEGRAM_BOT_TOKEN = "7101034406:AAH58bBLcg2G1W63PeIWTpbORv7iiAsFq4A";
+    private static final String DISCORD_TOKEN = System.getProperty("naulbi-token");
+    //private static final String TELEGRAM_BOT_TOKEN = "7101034406:AAH58bBLcg2G1W63PeIWTpbORv7iiAsFq4A";
 
     public static void main(String[] args) {
         try {
@@ -55,8 +63,10 @@ public class BotLauncher {
                         "root",
                         "");
 
-            flatiLogger.log(INFO, "[Startup] [&bTelegram&r] Регистрация &bтелеграм &rбота...");
-            registerTelegram();
+            //flatiLogger.log(INFO, "[Startup] [&bTelegram&r] Регистрация &bтелеграм &rбота...");
+            //registerTelegram();
+            flatiLogger.log(INFO, "[Startup] [&3Discord&r] Регистрация &3discord &rбота...");
+            registerDiscord();
 
             flatiLogger.log(INFO, "[Startup] [&dWebParser&r] Регистрация &dвеб-парсера&r...");
             webParser = new WebParser("https://anidub.pro");
@@ -108,7 +118,7 @@ public class BotLauncher {
         }
     }
 
-    private static void registerTelegram() {
+    /*private static void registerTelegram() {
         Executors.newSingleThreadExecutor().submit(() -> {
             try (final TelegramBotsLongPollingApplication botsApplication = new TelegramBotsLongPollingApplication()) {
                 botsApplication.registerBot(TELEGRAM_BOT_TOKEN, messageHandler = new MessageHandler(new OkHttpTelegramClient(TELEGRAM_BOT_TOKEN)));
@@ -117,10 +127,26 @@ public class BotLauncher {
                 e.printStackTrace();
             }
         });
+    }*/
+
+    @SneakyThrows
+    private static void registerDiscord() {
+       // JDALogger.setFallbackLoggerEnabled(false);
+       // Executors.newSingleThreadExecutor().submit(() -> {
+            jda = JDABuilder.createDefault(DISCORD_TOKEN)
+                    .enableIntents(GatewayIntent.MESSAGE_CONTENT)
+                    .setActivity(Activity.watching("bablomix"))
+                    .build();
+            jda.awaitReady();
+   //     });
     }
 
     public static void stop() {
         flatiLogger.log(INFO, "[Startup] &cОстановочка &fботика...");
+
+        flatiLogger.log(INFO, "[Startup] Shutdown discord...");
+        if(jda != null)
+            jda.shutdown();
 
         flatiLogger.log(INFO, "[Startup] Shutdown executors...");
         executorService.shutdown();
