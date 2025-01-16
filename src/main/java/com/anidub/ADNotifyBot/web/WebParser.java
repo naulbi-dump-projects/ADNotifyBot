@@ -68,7 +68,7 @@ public class WebParser {
                     messageBuilder.append("Открыть трекер: \n");
                     messageBuilder.append("- [Зеркало anidub.com](https://").append(trackerURL).append(")\n");
                 }
-                //messageBuilder.append("\nt.me/anidubnotify | t.me/anidubnotifydev\n");
+                messageBuilder.append("\nt.me/anidubnotify | t.me/naulbi\n");
                 messageBuilder.append("\n#video").append(idVideo);
                 // + "Открыть сайт: <a href=\"anidub.vip/" + idVideo  +"-.html\">Зеркало anidub.vip</a>"
                 // + MessageFormat.format(domain, "anidub.live", idVideo) + "\n" +

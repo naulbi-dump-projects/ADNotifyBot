@@ -46,8 +46,8 @@ dependencies {
     // discord
     implementation 'net.dv8tion:JDA:5.1.2'
     // telegram main
-    //implementation 'org.telegram:telegrambots-longpolling:7.10.0'
-    //implementation 'org.telegram:telegrambots-client:7.10.0'
+    implementation 'org.telegram:telegrambots-longpolling:7.10.0'
+    implementation 'org.telegram:telegrambots-client:7.10.0'
 
     // parsers and handlers
                         implementation 'org.jsoup:jsoup:1.16.1' // <REMOVED SOON - PERFORMANCE>

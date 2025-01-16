@@ -1,6 +1,8 @@
 package com.anidub.ADNotifyBot;
 
 import java.util.*;
+
+import com.anidub.ADNotifyBot.message.MessageHandler;
 import flaticommunity.log.*;
 import java.util.concurrent.*;
 import com.anidub.ADNotifyBot.web.*;
@@ -13,23 +15,23 @@ import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.internal.utils.JDALogger;
 
 import static flaticommunity.log.TypeLogger.*;
-//import org.telegram.telegrambots.longpolling.*;
-//import org.telegram.telegrambots.client.okhttp.*;
+import org.telegram.telegrambots.longpolling.*;
+import org.telegram.telegrambots.client.okhttp.*;
 
 public class BotLauncher {
 
     public static WebParser webParser;
     public static FlatiLogger flatiLogger;
-    //public static MessageHandler messageHandler;
+    public static MessageHandler messageHandler;
     public static JDA jda;
     public static DatabaseManager databaseManager;
     public static ScheduledExecutorService executorService;
 
     public static Map<Integer, Integer> videos = new HashMap<>(); // idVideo, series
-    //public static Map<Integer, Integer> trackerVideos = new HashMap<>(); // idVideo, trackerIdVideo
+    public static Map<Integer, Integer> trackerVideos = new HashMap<>(); // idVideo, trackerIdVideo
 
     private static final String DISCORD_TOKEN = System.getProperty("naulbi-token");
-    //private static final String TELEGRAM_BOT_TOKEN = "7101034406:AAH58bBLcg2G1W63PeIWTpbORv7iiAsFq4A";
+    private static final String TELEGRAM_BOT_TOKEN = System.getProperty("tg-naulbi-token")/*"7101034406:AAH58bBLcg2G1W63PeIWTpbORv7iiAsFq4A"*/;
 
     public static void main(String[] args) {
         try {
@@ -63,8 +65,8 @@ public class BotLauncher {
                         "root",
                         "");
 
-            //flatiLogger.log(INFO, "[Startup] [&bTelegram&r] Регистрация &bтелеграм &rбота...");
-            //registerTelegram();
+            flatiLogger.log(INFO, "[Startup] [&bTelegram&r] Регистрация &bтелеграм &rбота...");
+            registerTelegram();
             flatiLogger.log(INFO, "[Startup] [&3Discord&r] Регистрация &3discord &rбота...");
             registerDiscord();
 
@@ -118,7 +120,7 @@ public class BotLauncher {
         }
     }
 
-    /*private static void registerTelegram() {
+    private static void registerTelegram() {
         Executors.newSingleThreadExecutor().submit(() -> {
             try (final TelegramBotsLongPollingApplication botsApplication = new TelegramBotsLongPollingApplication()) {
                 botsApplication.registerBot(TELEGRAM_BOT_TOKEN, messageHandler = new MessageHandler(new OkHttpTelegramClient(TELEGRAM_BOT_TOKEN)));
@@ -127,7 +129,7 @@ public class BotLauncher {
                 e.printStackTrace();
             }
         });
-    }*/
+    }
 
     @SneakyThrows
     private static void registerDiscord() {

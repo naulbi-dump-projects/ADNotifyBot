@@ -1,4 +1,4 @@
-/*package com.anidub.ADNotifyBot.message;
+package com.anidub.ADNotifyBot.message;
 
 import lombok.*;
 import org.telegram.telegrambots.meta.generics.*;
@@ -36,4 +36,3 @@ public class MessageHandler implements LongPollingSingleThreadUpdateConsumer {
                 .build());
     }
 }
-*/
