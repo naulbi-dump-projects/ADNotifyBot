@@ -53,32 +53,47 @@ public class WebParser {
 
                 String trackerURL = parseTracker("https://anidub.pro/" + idVideo + "-.html");
 
-                StringBuilder messageBuilder = new StringBuilder();
-                messageBuilder.append("**").append(title).append("**\n\n");
-                messageBuilder.append("Текущая серия: ").append(series).append("\n");
-                messageBuilder.append("Зрительский рейтинг: ").append(rating).append("\n");
+                StringBuilder messageBuilderDiscord = new StringBuilder();
+                StringBuilder messageBuilderTelegram = new StringBuilder();
+                messageBuilderDiscord.append("**").append(title).append("**\n\n");
+                messageBuilderTelegram.append("<b>").append(title).append("</b>\n\n");
+                messageBuilderDiscord.append("Текущая серия: ").append(series).append("\n");
+                messageBuilderTelegram.append("Текущая серия: ").append(series).append("\n");
+                messageBuilderDiscord.append("Зрительский рейтинг: ").append(rating).append("\n");
+                messageBuilderTelegram.append("Зрительский рейтинг: ").append(rating).append("\n");
                 //+ "Тип получения данных: <b>Со страницы</b>/<strike>С ленты</strike>\n"
-                messageBuilder.append("\nОткрыть сайт: \n");
-                messageBuilder.append("- [Зеркало anidub.com](https://anidub.com/").append(idVideo).append(")\n");
-                messageBuilder.append("- [Зеркало anidub.pro](https://anidub.pro/").append(idVideo).append(")\n");
-                messageBuilder.append("- [Зеркало anidub.live](https://anidub.live/").append(idVideo).append(")\n");
-                messageBuilder.append("- [Зеркало anidub.life](https://anidub.life").append(idVideo).append(")\n");
-                messageBuilder.append("- [Зеркало anidub.club](https://anidub.club/").append(idVideo).append(")\n");
-                messageBuilder.append("- [Зеркало anidub.run](https://anidub.run/").append(idVideo).append(")\n");
-                messageBuilder.append("- [Зеркало anidub.top](https://anidub.top/").append(idVideo).append(")\n");
+                messageBuilderDiscord.append("\nОткрыть сайт: \n");
+                messageBuilderTelegram.append("\nОткрыть сайт: \n");
+                messageBuilderDiscord.append("- [Зеркало anidub.com](https://anidub.com/").append(idVideo).append(")\n");
+                messageBuilderTelegram.append("- <a href=\"anidub.com/").append(idVideo).append("-.html\">Зеркало anidub.com</a>\n");
+                messageBuilderDiscord.append("- [Зеркало anidub.pro](https://anidub.pro/").append(idVideo).append(")\n");
+                messageBuilderTelegram.append("- <a href=\"anidub.pro/").append(idVideo).append("-.html\">Зеркало anidub.pro</a>\n");
+                messageBuilderDiscord.append("- [Зеркало anidub.live](https://anidub.live/").append(idVideo).append(")\n");
+                messageBuilderTelegram.append("- <a href=\"anidub.live/").append(idVideo).append("-.html\">Зеркало anidub.live</a>\n");
+                messageBuilderDiscord.append("- [Зеркало anidub.life](https://anidub.life").append(idVideo).append(")\n");
+                messageBuilderTelegram.append("- <a href=\"anidub.life/").append(idVideo).append("-.html\">Зеркало anidub.life</a>\n");
+                messageBuilderDiscord.append("- [Зеркало anidub.club](https://anidub.club/").append(idVideo).append(")\n");
+                messageBuilderTelegram.append("- <a href=\"anidub.club/").append(idVideo).append("-.html\">Зеркало anidub.club</a>\n");
+                messageBuilderDiscord.append("- [Зеркало anidub.run](https://anidub.run/").append(idVideo).append(")\n");
+                messageBuilderTelegram.append("- <a href=\"anidub.run/").append(idVideo).append("-.html\">Зеркало anidub.run</a>\n");
+                messageBuilderDiscord.append("- [Зеркало anidub.top](https://anidub.top/").append(idVideo).append(")\n");
+                messageBuilderTelegram.append("- <a href=\"anidub.top/").append(idVideo).append("-.html\">Зеркало anidub.top</a>\n");
                 if(trackerURL != null) {
-                    messageBuilder.append("Открыть трекер: \n");
-                    messageBuilder.append("- [Зеркало anidub.com](https://").append(trackerURL).append(")\n");
+                    messageBuilderDiscord.append("Открыть трекер: \n");
+                    messageBuilderTelegram.append("Открыть трекер: \n");
+                    messageBuilderDiscord.append("- [Зеркало anidub.com](https://").append(trackerURL).append(")\n");
+                    messageBuilderTelegram.append("- <a href=\"").append(trackerURL).append("\">Зеркало anidub.com</a>\n");
                 }
-                messageBuilder.append("\nt.me/anidubnotify | t.me/naulbi\n");
-                messageBuilder.append("\n#video").append(idVideo);
+                messageBuilderTelegram.append("\nt.me/anidubnotify | t.me/naulbi\n");
+                messageBuilderDiscord.append("\n#video").append(idVideo);
+                messageBuilderTelegram.append("\n#video").append(idVideo);
                 // + "Открыть сайт: <a href=\"anidub.vip/" + idVideo  +"-.html\">Зеркало anidub.vip</a>"
                 // + MessageFormat.format(domain, "anidub.live", idVideo) + "\n" +
                 // MessageFormat.format(domain, "anidub.vip", idVideo)
 
                 final var urlImage = "https://anidub.pro" + owlItem.select(".th-img").select("img").attr("src");
                 BotLauncher.messageHandler.sendImage("-1002312688413",
-                        messageBuilder.toString(),
+                        messageBuilderTelegram.toString(),
                         urlImage
                 );
                 final var embed = new EmbedBuilder()
@@ -86,7 +101,7 @@ public class WebParser {
                         .setImage(urlImage)
                         .build();
                 BotLauncher.jda.getTextChannelById(1297141634886013000L)
-                        .sendMessage(messageBuilder.toString())
+                        .sendMessage(messageBuilderDiscord.toString())
                         .addEmbeds(embed)
                         .queue();
                 Thread.sleep(5000L * newVideos++);
