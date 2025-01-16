@@ -64,6 +64,8 @@ public class WebParser {
                 messageBuilder.append("- [Зеркало anidub.live](https://anidub.live/").append(idVideo).append(")\n");
                 messageBuilder.append("- [Зеркало anidub.life](https://anidub.life").append(idVideo).append(")\n");
                 messageBuilder.append("- [Зеркало anidub.club](https://anidub.club/").append(idVideo).append(")\n");
+                messageBuilder.append("- [Зеркало anidub.run](https://anidub.run/").append(idVideo).append(")\n");
+                messageBuilder.append("- [Зеркало anidub.top](https://anidub.top/").append(idVideo).append(")\n");
                 if(trackerURL != null) {
                     messageBuilder.append("Открыть трекер: \n");
                     messageBuilder.append("- [Зеркало anidub.com](https://").append(trackerURL).append(")\n");
