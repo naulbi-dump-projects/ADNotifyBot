@@ -76,13 +76,14 @@ public class WebParser {
                 // + MessageFormat.format(domain, "anidub.live", idVideo) + "\n" +
                 // MessageFormat.format(domain, "anidub.vip", idVideo)
 
-                /*BotLauncher.messageHandler.sendImage("-1002088760542", // -1002088760542 = main channel || -1002091080112 = dev channel
+                final var urlImage = "https://anidub.pro" + owlItem.select(".th-img").select("img").attr("src");
+                BotLauncher.messageHandler.sendImage("-1002312688413",
                         messageBuilder.toString(),
-                        "https://anidub.pro" + owlItem.select(".th-img").select("img").attr("src")
-                );*/
+                        urlImage
+                );
                 final var embed = new EmbedBuilder()
                         .setTitle(title)
-                        .setImage("https://anidub.pro" + owlItem.select(".th-img").select("img").attr("src"))
+                        .setImage(urlImage)
                         .build();
                 BotLauncher.jda.getTextChannelById(1297141634886013000L)
                         .sendMessage(messageBuilder.toString())
