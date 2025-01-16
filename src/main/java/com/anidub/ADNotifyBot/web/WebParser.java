@@ -64,24 +64,24 @@ public class WebParser {
                 //+ "Тип получения данных: <b>Со страницы</b>/<strike>С ленты</strike>\n"
                 messageBuilderDiscord.append("\nОткрыть сайт: \n");
                 messageBuilderTelegram.append("\nОткрыть сайт: \n");
-                messageBuilderDiscord.append("- [Зеркало anidub.com](https://anidub.com/").append(idVideo).append(")\n");
+                messageBuilderDiscord.append("- [Зеркало anidub.com](https://anidub.com/").append(idVideo).append("-.html)\n");
                 messageBuilderTelegram.append("- <a href=\"anidub.com/").append(idVideo).append("-.html\">Зеркало anidub.com</a>\n");
-                messageBuilderDiscord.append("- [Зеркало anidub.pro](https://anidub.pro/").append(idVideo).append(")\n");
+                messageBuilderDiscord.append("- [Зеркало anidub.pro](https://anidub.pro/").append(idVideo).append("-.html)\n");
                 messageBuilderTelegram.append("- <a href=\"anidub.pro/").append(idVideo).append("-.html\">Зеркало anidub.pro</a>\n");
-                messageBuilderDiscord.append("- [Зеркало anidub.live](https://anidub.live/").append(idVideo).append(")\n");
+                messageBuilderDiscord.append("- [Зеркало anidub.live](https://anidub.live/").append(idVideo).append("-.html)\n");
                 messageBuilderTelegram.append("- <a href=\"anidub.live/").append(idVideo).append("-.html\">Зеркало anidub.live</a>\n");
-                messageBuilderDiscord.append("- [Зеркало anidub.life](https://anidub.life").append(idVideo).append(")\n");
+                messageBuilderDiscord.append("- [Зеркало anidub.life](https://anidub.life").append(idVideo).append("-.html)\n");
                 messageBuilderTelegram.append("- <a href=\"anidub.life/").append(idVideo).append("-.html\">Зеркало anidub.life</a>\n");
-                messageBuilderDiscord.append("- [Зеркало anidub.club](https://anidub.club/").append(idVideo).append(")\n");
+                messageBuilderDiscord.append("- [Зеркало anidub.club](https://anidub.club/").append(idVideo).append("-.html)\n");
                 messageBuilderTelegram.append("- <a href=\"anidub.club/").append(idVideo).append("-.html\">Зеркало anidub.club</a>\n");
-                messageBuilderDiscord.append("- [Зеркало anidub.run](https://anidub.run/").append(idVideo).append(")\n");
+                messageBuilderDiscord.append("- [Зеркало anidub.run](https://anidub.run/").append(idVideo).append("-.html)\n");
                 messageBuilderTelegram.append("- <a href=\"anidub.run/").append(idVideo).append("-.html\">Зеркало anidub.run</a>\n");
-                messageBuilderDiscord.append("- [Зеркало anidub.top](https://anidub.top/").append(idVideo).append(")\n");
+                messageBuilderDiscord.append("- [Зеркало anidub.top](https://anidub.top/").append(idVideo).append("-.html)\n");
                 messageBuilderTelegram.append("- <a href=\"anidub.top/").append(idVideo).append("-.html\">Зеркало anidub.top</a>\n");
                 if(trackerURL != null) {
                     messageBuilderDiscord.append("Открыть трекер: \n");
                     messageBuilderTelegram.append("Открыть трекер: \n");
-                    messageBuilderDiscord.append("- [Зеркало anidub.com](https://").append(trackerURL).append(")\n");
+                    messageBuilderDiscord.append("- [Зеркало anidub.com](https://").append(trackerURL).append("-.html)\n");
                     messageBuilderTelegram.append("- <a href=\"").append(trackerURL).append("\">Зеркало anidub.com</a>\n");
                 }
                 messageBuilderTelegram.append("\nt.me/anidubnotify | t.me/naulbi\n");
