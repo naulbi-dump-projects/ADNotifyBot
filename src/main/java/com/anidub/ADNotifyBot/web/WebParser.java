@@ -51,7 +51,7 @@ public class WebParser {
                 //BotLauncher.flatiLogger.log(INFO, title + "\n" + link + "\n" + rating + "\n" + owlItem.select(".th-img").select("img").attr("src"));
                 BotLauncher.flatiLogger.log(INFO, "[NEW VIDEO/" + idVideo + "] " + title);
 
-                String trackerURL = parseTracker("https://anidub.pro/" + idVideo + "-.html");
+                String trackerURL = parseTracker("https://anidub.world/" + idVideo + "-.html");
 
                 StringBuilder messageBuilderDiscord = new StringBuilder();
                 StringBuilder messageBuilderTelegram = new StringBuilder();
@@ -78,6 +78,8 @@ public class WebParser {
                 messageBuilderTelegram.append("- <a href=\"anidub.run/").append(idVideo).append("-.html\">Зеркало anidub.run</a>\n");
                 messageBuilderDiscord.append("- [Зеркало anidub.top](https://anidub.top/").append(idVideo).append("-.html)\n");
                 messageBuilderTelegram.append("- <a href=\"anidub.top/").append(idVideo).append("-.html\">Зеркало anidub.top</a>\n");
+                messageBuilderDiscord.append("- [Зеркало anidub.world](https://anidub.world/").append(idVideo).append("-.html)\n");
+                messageBuilderTelegram.append("- <a href=\"anidub.world/").append(idVideo).append("-.html\">Зеркало anidub.world</a>\n");
                 if(trackerURL != null) {
                     messageBuilderDiscord.append("Открыть трекер: \n");
                     messageBuilderTelegram.append("Открыть трекер: \n");
